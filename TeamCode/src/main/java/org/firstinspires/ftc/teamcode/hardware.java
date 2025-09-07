@@ -18,4 +18,14 @@ public class hardware {
         frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontright.setPower(0);
 
+        backleft = hardwareMap.get(DcMotor.class,"backLeft");
+        backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backleft.setPower(0);
+        
+        backright = hardwareMap.get(DcMotor.class,"backRight");
+        backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backright.setPower(0);
+    }
 }
