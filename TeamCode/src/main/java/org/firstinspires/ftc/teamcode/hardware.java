@@ -5,13 +5,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class hardware {
-    public DcMotor frontleft; //Tell Java that there is a DcMotor In the front left
-    public DcMotor backleft; //Tell Java that there is a DcMotor In the back left
-    public DcMotor frontright; //Tell Java that there is a DcMotor In the front right
-    public DcMotor backright; //Tell Java that there is a DcMotor In the back right.
-    public Servo feedleft;
-    public Servo feedright;
-    public DcMotor shooter;
+    public DcMotor frontleft; //Tell Java that there is a DcMotor In the front left. This is a wheel
+    public DcMotor backleft; //Tell Java that there is a DcMotor In the back left. This is a wheel
+    public DcMotor frontright; //Tell Java that there is a DcMotor In the front right. This is a wheel
+    public DcMotor backright; //Tell Java that there is a DcMotor In the back right. This is a wheel
+    public Servo feedleft;//Tell Java that there is a servo named feedleft. This will feed the ball into the launch area
+    public Servo feedright;//Tell Java that there is a servo named feedright. This will feed the ball into the launch area
+    public DcMotor shooter;//Tell Java that there is a new motor called shooter. This will shoot the ball out.
     public void init(HardwareMap hardwareMap){
         frontleft = hardwareMap.get(DcMotor.class,"frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
