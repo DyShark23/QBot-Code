@@ -38,3 +38,4 @@ public class hardware {
         shooter.setPower(0);
     }
 }
+
