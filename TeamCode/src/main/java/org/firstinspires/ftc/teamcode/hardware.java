@@ -36,4 +36,5 @@ public class hardware {
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         shooter.setPower(0);
+    }
 }
