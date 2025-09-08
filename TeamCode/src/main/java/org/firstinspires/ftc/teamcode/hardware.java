@@ -17,7 +17,7 @@ public class hardware {
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        frontright = hardwareMap.get(DcMotor.class,"frontRight");
+        frontright = hardwareMap.get(DcMotor.class, "frontRight");
         frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontright.setPower(0);
