@@ -22,7 +22,7 @@ public class hardware {
         frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontright.setPower(0);
 
-        backleft = hardwareMap.get(DcMotor.class,"backLeft");
+        backleft = hardwareMap.get(DcMotor.class, "backLeft");
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backleft.setPower(0);
