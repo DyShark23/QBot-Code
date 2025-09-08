@@ -8,6 +8,9 @@ public class hardware {
     public DcMotor backleft; //Tell Java that there is a DcMotor In the back left
     public DcMotor frontright; //Tell Java that there is a DcMotor In the front right
     public DcMotor backright; //Tell Java that there is a DcMotor In the back right.
+    public Servo feedleft;
+    public Servo feedright;
+    public DcMotor shooter;
     public void init(HardwareMap hardwareMap){
         frontleft = hardwareMap.get(DcMotor.class,"frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
