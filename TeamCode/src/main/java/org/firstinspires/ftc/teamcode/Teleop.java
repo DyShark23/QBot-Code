@@ -19,7 +19,7 @@ public class Teleop extends OpMode {
         }
 
         if (gamepad1.a=false){
-            double a_power = 0;
+            double apower = 0;
         }
 
         robot.backright.setPower(yRight);
