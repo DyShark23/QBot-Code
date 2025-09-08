@@ -13,6 +13,7 @@ public class Teleop extends OpMode {
     public void loop(){
         double yLeft = -gamepad1.left_stick_y;
         double yRight = -gamepad1.right_stick_y;
+        double aPower = 0;
 
         if (gamepad1.a=true){
             double aPower = 2;
