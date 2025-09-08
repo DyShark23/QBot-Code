@@ -31,5 +31,9 @@ public class hardware {
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backright.setPower(0);
-    }
+
+        shooter = hardwareMap.get(DcMotor.class,"shooter");
+        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter.setPower(0);
 }
