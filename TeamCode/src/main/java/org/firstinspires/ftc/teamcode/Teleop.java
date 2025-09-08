@@ -27,8 +27,8 @@ public class Teleop extends OpMode {
         robot.frontright.setPower(yRight);
         robot.frontleft.setPower(yLeft);
         robot.backleft.setPower(yLeft);
-        robot.shooter.setPower(a_power);
-
+        robot.shooter.setPower(aPower);
+        
         telemetry.addData("Left Joystick", yLeft);
         telemetry.addData("Right Joystick", yRight);
         telemetry.addData("shooter power",aPower )
