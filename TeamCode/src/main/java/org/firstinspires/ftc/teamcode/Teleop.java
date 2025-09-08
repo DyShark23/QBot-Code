@@ -15,7 +15,7 @@ public class Teleop extends OpMode {
         double yRight = -gamepad1.right_stick_y;
 
         if (gamepad1.a=true){
-            double a_power = -gamepad1.a;
+            double a_power = 2;
         }
 
         if (gamepad1.a=false){
