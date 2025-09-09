@@ -36,6 +36,9 @@ public class hardware {
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         shooter.setPower(0);
+
+        feedleft = hardwareMap.get(Servo.class, "feedLeft");
+        feedright = hardwareMap.get(Servo.class,"feedRight");
     }
 }
 
