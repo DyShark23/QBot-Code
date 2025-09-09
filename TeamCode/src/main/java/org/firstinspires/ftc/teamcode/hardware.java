@@ -37,7 +37,7 @@ public class hardware {
         shooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         shooter.setPower(0);
 
-        feed = hardwareMap.get(Servo.class, "feedLeft");
+        feed = hardwareMap.get(CRServo.class, "feed");
     }
 }
 
