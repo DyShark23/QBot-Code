@@ -16,7 +16,7 @@ public class Teleop extends OpMode {
         double aPower = 0;
 
         if (gamepad1.a=true){
-            double aPower = 2;
+            aPower = 2;
         }
         if (gamepad1.a=false){
             aPower = 0;
