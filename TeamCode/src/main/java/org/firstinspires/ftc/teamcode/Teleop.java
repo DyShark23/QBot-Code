@@ -38,5 +38,6 @@ public class Teleop extends OpMode {
         telemetry.addData("Left Joystick", yLeft);
         telemetry.addData("Right Joystick", yRight);
         telemetry.addData("shooter power",aPower );
+        telemetry.addData("feeder power", bPower)
     }
 }
