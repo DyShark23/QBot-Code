@@ -12,6 +12,7 @@ public class hardware {
     public Servo feedleft;//Tell Java that there is a servo named feedleft. This will feed the ball into the launch area
     public Servo feedright;//Tell Java that there is a servo named feedright. This will feed the ball into the launch area
     public DcMotor shooter;//Tell Java that there is a new motor called shooter. This will shoot the ball out.
+
     public void init(HardwareMap hardwareMap) {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
