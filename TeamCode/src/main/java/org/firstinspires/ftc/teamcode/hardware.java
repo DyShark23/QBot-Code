@@ -9,7 +9,7 @@ public class hardware {
     public DcMotor backleft; //Tell Java that there is a DcMotor In the back left. This is a wheel
     public DcMotor frontright; //Tell Java that there is a DcMotor In the front right. This is a wheel
     public DcMotor backright; //Tell Java that there is a DcMotor In the back right. This is a wheel
-    public Servo feed;//Tell Java that there is a servo named feed. This will feed the ball into the launch are
+    public CRServo feed;//Tell Java that there is a CRservo named feed. This will feed the ball into the launch are
     public DcMotor shooter;//Tell Java that there is a new motor called shooter. This will shoot the ball out.
 
     public void init(HardwareMap hardwareMap) {
