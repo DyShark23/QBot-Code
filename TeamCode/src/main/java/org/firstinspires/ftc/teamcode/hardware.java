@@ -38,6 +38,7 @@ public class hardware {
         shooter.setPower(0);
 
         feed = hardwareMap.get(CRServo.class, "feed");
+        webcam = hardwareMap.get(WebcamName.class, "webcamDefault");
     }
 }
 
