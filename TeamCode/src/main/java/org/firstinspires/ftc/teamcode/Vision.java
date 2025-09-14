@@ -10,6 +10,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 public class Vision extends LinearOpMode {
+    public double MotifID;
     @Override
     public void runOpMode() throws InterruptedException{
         AprilTagProcessor tagProcessor = new AprilTagProcessor.Builder()
@@ -22,13 +23,10 @@ public class Vision extends LinearOpMode {
                 .build();
 
 
-        waitForStart();
         while (!isStopRequested()&& opModeIsActive()){
            if(tagProcessor.getDetections().size() > 0){
                AprilTagDetection tag = tagProcessor.getDetections().get(0);
-               double MotifID = tag.id;
-
-
+               MotifID = tag.id;
            }
     }
 }
