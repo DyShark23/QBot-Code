@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
+
 
 public class hardware {
     public DcMotor frontleft; //Tell Java that there is a DcMotor In the front left. This is a wheel
@@ -11,7 +12,6 @@ public class hardware {
     public DcMotor backright; //Tell Java that there is a DcMotor In the back right. This is a wheel
     public CRServo feed;//Tell Java that there is a CRservo named feed. This will feed the ball into the launch are
     public DcMotor shooter;//Tell Java that there is a new motor called shooter. This will shoot the ball out.
-    public WebcamName webcam;
 
     public void init(HardwareMap hardwareMap) {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -39,7 +39,6 @@ public class hardware {
         shooter.setPower(0);
 
         feed = hardwareMap.get(CRServo.class, "feed");
-        webcam = hardwareMap.get(WebcamName.class, "webcamDefault");
     }
 }
 
