@@ -13,34 +13,20 @@ public class Teleop extends OpMode {
     public void loop(){
         double yLeft = -gamepad1.left_stick_y;
         double yRight = -gamepad1.right_stick_y;
-        double aPower = 0;
-        double bPower = 0;
-
-        if (-gamepad1.a=true){
-            aPower = 2;
-        }
-        if (-gamepad1.a=false){
-            aPower = 0;
-        }
-
-        if (-gamepad1.b=true){
-            bPower = 1;
-        }
-        if (-gamepad1.b=false){
-            bPower = 0;
-        }
+        double shoot = -gamepad1.left_trigger;
+        double feed = -gamepad1.right_trigger;
 
         robot.backright.setPower(yRight);
         robot.frontright.setPower(yRight);
         robot.frontleft.setPower(yLeft);
         robot.backleft.setPower(yLeft);
-        robot.shooter.setPower(aPower);
-        robot.feed.setPower(bPower);
+        robot.shooter.setPower(shoot);
+        robot.feed.setPower(feed);
 
 
         telemetry.addData("Left Joystick", yLeft);
         telemetry.addData("Right Joystick", yRight);
-        telemetry.addData("shooter power",aPower );
-        telemetry.addData("feeder power", bPower);
+        telemetry.addData("shooter power",shoot);
+        telemetry.addData("feeder power", feed);
     }
 }
