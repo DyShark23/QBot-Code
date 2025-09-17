@@ -45,6 +45,7 @@ public class hardware {
         shooter2 = hardwareMap.get(DcMotor.class, "shooter2");
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter2.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter2.setPower(0);
 
     }

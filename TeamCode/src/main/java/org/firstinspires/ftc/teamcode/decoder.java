@@ -15,7 +15,6 @@ public class decoder extends OpMode {
         }
         if (vision.MotifID==22){
             Motif = "PGP";
-
         }
         if (vision.MotifID==23){
             Motif = "PPG";
