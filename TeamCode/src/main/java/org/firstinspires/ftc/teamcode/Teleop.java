@@ -18,18 +18,10 @@ public class Teleop extends OpMode {
         double shoot = -gamepad1.left_trigger;
         double feed = -gamepad1.right_trigger;
 
-        if (yRight+yLeft>xRight+xLeft){
-            robot.backright.setPower(yRight);
-            robot.frontright.setPower(yRight);
-            robot.frontleft.setPower(yLeft);
-            robot.backleft.setPower(yLeft);
-        }
-        if (xRight+xLeft>yLeft+yRight){
-            robot.backright.setPower(xRight);
-            robot.frontright.setPower(xRight);
-            robot.frontleft.setPower(xLeft);
-            robot.backleft.setPower(xLeft);
-        }
+        robot.backright.setPower(yRight);
+        robot.frontright.setPower(yLeft);
+        robot.frontleft.setPower(yRight);
+        robot.backleft.setPower(yLeft);
         robot.shooter.setPower(shoot);
         robot.shooter2.setPower(shoot);
 
