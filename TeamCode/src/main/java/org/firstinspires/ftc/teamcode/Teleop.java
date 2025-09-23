@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-@TeleOp (name = "Teleopv1")
+@TeleOp (name = "TeleopALl")
 public class Teleop extends OpMode {
     public hardware robot = new hardware();
 
@@ -11,17 +11,19 @@ public class Teleop extends OpMode {
 
     @Override
     public void loop(){
-        double yLeft = -gamepad1.left_stick_y;
-        double yRight = -gamepad1.right_stick_y;
-        double xLeft = -gamepad1.left_stick_x;
-        double xRight = -gamepad1.right_stick_x;
+        double fwd = gamepad1.right_stick_y;
+        double str = gamepad1.right_stick_x;
+        double rot = gamepad1.left_stick_x;
+        double FL = fwd+str+rot;
+        double FR = fwd-str-rot;
+        double RL = fwd-str+rot;
+        double RR = fwd+str-rot;
         double shoot = -gamepad1.left_trigger;
-        double feed = -gamepad1.right_trigger;
 
-        robot.backright.setPower(yRight);
-        robot.frontright.setPower(yLeft);
-        robot.frontleft.setPower(yRight);
-        robot.backleft.setPower(yLeft);
+        robot.backright.setPower(RR);
+        robot.frontright.setPower(FR);
+        robot.frontleft.setPower(FL);
+        robot.backleft.setPower(RL);
         robot.shooter.setPower(shoot);
         robot.shooter2.setPower(shoot);
 
