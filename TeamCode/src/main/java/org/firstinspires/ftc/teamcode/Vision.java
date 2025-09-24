@@ -9,26 +9,27 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
-public class Vision extends LinearOpMode {
-    public double MotifID;
+public class Vision extends LinearOpMode{
+    double MotifID;
+
     @Override
     public void runOpMode() throws InterruptedException{
+
         AprilTagProcessor tagProcessor = new AprilTagProcessor.Builder()
+                .setDrawTagID(true)
                 .setDrawTagOutline(true)
                 .build();
         VisionPortal visionPortal = new VisionPortal.Builder()
                 .addProcessor(tagProcessor)
-                .setCamera(hardwareMap.get(WebcamName.class,"WebCam1"))
+                .setCamera(hardwareMap.get(WebcamName.class,"Webcam1"))
                 .setCameraResolution(new Size(640,480))
+                .enableLiveView(true)
                 .build();
-
-
         while (!isStopRequested()&& opModeIsActive()){
-           if(tagProcessor.getDetections().size() > 0){
-               AprilTagDetection tag = tagProcessor.getDetections().get(0);
-               MotifID = tag.id;
-           }
+            if(tagProcessor.getDetections().size() > 0){
+                AprilTagDetection tag = tagProcessor.getDetections().get(0);
+                MotifID = tag.id;
+            }
+        }
     }
-}
-
 }
