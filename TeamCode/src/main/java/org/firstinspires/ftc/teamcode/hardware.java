@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -18,7 +17,6 @@ public class hardware {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontleft.setPower(0);
 
         frontright = hardwareMap.get(DcMotor.class, "frontRight");
@@ -28,9 +26,7 @@ public class hardware {
 
         backleft = hardwareMap.get(DcMotor.class, "backLeft");
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backleft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backleft.setPower(0);
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);backleft.setPower(0);
 
         backright = hardwareMap.get(DcMotor.class, "backRight");
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -45,7 +41,6 @@ public class hardware {
         shooter2 = hardwareMap.get(DcMotor.class, "shooter2");
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        shooter2.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter2.setPower(0);
 
     }
