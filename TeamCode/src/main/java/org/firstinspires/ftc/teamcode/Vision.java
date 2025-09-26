@@ -30,6 +30,8 @@ public class Vision extends LinearOpMode{
                 AprilTagDetection tag = tagProcessor.getDetections().get(0);
                 MotifID = tag.id;
             }
+            telemetry.addData("Camera State", visionPortal.getCameraState());
+            telemetry.update();
         }
     }
 }
