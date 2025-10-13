@@ -11,6 +11,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 public class Vision extends LinearOpMode{
     double MotifID;
+    double Bearing;
 
     @Override
     public void runOpMode() throws InterruptedException{
@@ -29,6 +30,7 @@ public class Vision extends LinearOpMode{
             if(tagProcessor.getDetections().size() > 0){
                 AprilTagDetection tag = tagProcessor.getDetections().get(0);
                 MotifID = tag.id;
+                Bearing = tag.ftcPose.bearing;
             }
             telemetry.addData("Camera State", visionPortal.getCameraState());
             telemetry.update();
