@@ -1,28 +1,26 @@
 package org.firstinspires.ftc.teamcode;
 
+import org.firstinspires.ftc.teamcode.Vision;
+
 public class TurnTowardAprilTag {
 
-    // Public static variables to hold wheel powers\
+    // Public static variables to hold wheel powers
     public static double aptflPower;
     public static double aptfrPower;
     public static double aptblPower;
     public static double aptbrPower;
-    // Call this to update the powers based on bearing
-    public static void updatePowersFromBearing(double bearingDegrees) {
-        // Convert bearing to radians
-        double bearingRadians = Math.toRadians(bearingDegrees);
 
-        // Swap x and y to match compass-style bearings
+    // Updates wheel powers based on bearing angle
+    public static void updatePowersFromBearing(double bearingDegrees) {
+        double bearingRadians = Math.toRadians(bearingDegrees);
         double x = Math.sin(bearingRadians); // strafe
         double y = Math.cos(bearingRadians); // forward
 
-        // Mecanum wheel formulas
         double fl = y + x;
         double fr = y - x;
         double bl = y - x;
         double br = y + x;
 
-        // Normalize powers so none exceed 1.0
         double max = Math.max(Math.abs(fl), Math.max(Math.abs(fr),
                 Math.max(Math.abs(bl), Math.abs(br))));
         if (max > 1.0) {
@@ -32,13 +30,25 @@ public class TurnTowardAprilTag {
             br /= max;
         }
 
-        // Store in public variables
         aptflPower = fl;
         aptfrPower = fr;
         aptblPower = bl;
         aptbrPower = br;
     }
-    public void setAPTPowers(){
 
+    // Call this to turn toward a specific AprilTag ID
+    public static void TurnToward(int apriltagID) {
+        Vision vision = new Vision();
+
+        // Check if bearing is valid (assuming -999 means "no tag detected")
+        if (vision.Bearing != -999) {
+            updatePowersFromBearing(vision.Bearing);
+        } else {
+            // Stop movement if no valid bearing
+            aptflPower = 0;
+            aptfrPower = 0;
+            aptblPower = 0;
+            aptbrPower = 0;
+        }
     }
 }
