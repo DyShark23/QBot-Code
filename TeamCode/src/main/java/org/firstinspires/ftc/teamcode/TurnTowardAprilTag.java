@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.Vision;
 
 public class TurnTowardAprilTag {
+    public hardware robot = new hardware();
 
     // Public static variables to hold wheel powers
     public static double aptflPower;
