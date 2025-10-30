@@ -12,11 +12,14 @@ public class hardware {
     public DcMotor backright; //Tell Java that there is a DcMotor In the back right. This is a wheel
     public DcMotor shooter;//Tell Java that there is a new motor called shooter. This will shoot the ball out.
     public DcMotor shooter2;//Tell Java that there is a new motor called shooter2. This will shoot the ball out.
+    public DcMotor intake;//def intake
+    public DcMotor intake2; //def intake 2
 
     public void init(HardwareMap hardwareMap) {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
         frontleft.setPower(0);
 
         frontright = hardwareMap.get(DcMotor.class, "frontRight");
@@ -42,6 +45,16 @@ public class hardware {
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         shooter2.setPower(0);
+
+        intake = hardwareMap.get(DcMotor.class,"intake");
+        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setPower(0);
+
+        intake2 = hardwareMap.get(DcMotor.class,"intake2");
+        intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake2.setPower(0);
 
     }
 }

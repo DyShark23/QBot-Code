@@ -19,13 +19,18 @@ public class Teleop extends OpMode {
         double RL = fwd-str+rot;
         double RR = fwd+str-rot;
         double shoot = -gamepad1.left_trigger;
+        double intake = -gamepad1.right_trigger;
+        double lshoot = shoot*(-1);
+        double lintake = intake*(-1);
 
         robot.backright.setPower(RR);
         robot.frontright.setPower(FR);
         robot.frontleft.setPower(FL);
         robot.backleft.setPower(RL);
         robot.shooter.setPower(shoot);
-        robot.shooter2.setPower(shoot);
+        robot.shooter2.setPower(lshoot);
+        robot.intake.setPower(intake);
+        robot.intake2.setPower(lintake);
 
         telemetry.addData("RR",RR);
         telemetry.addData("FR", FR);
