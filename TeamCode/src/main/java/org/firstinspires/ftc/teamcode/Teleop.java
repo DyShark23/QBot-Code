@@ -12,8 +12,10 @@ public class Teleop extends OpMode {
     @Override
     public void loop(){
         double fwd = gamepad1.right_stick_y;
-        double str = gamepad1.right_stick_x;
-        double rot = gamepad1.left_stick_x;
+        double str1 = gamepad1.right_stick_x;
+        double str = str1*-1;
+        double rot1 = gamepad1.left_stick_x;
+        double rot = rot1*-1;
         double FL = fwd+str+rot;
         double FR = fwd-str-rot;
         double RL = fwd-str+rot;
