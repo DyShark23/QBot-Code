@@ -11,13 +11,21 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorRange;
 import org.firstinspires.ftc.vision.opencv.ColorSpace;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
+
+import java.util.List;
 
 public class Vision extends LinearOpMode{
     double MotifID;
     double Bearing;
     boolean SeeP;
     boolean SeeG;
+    double gcenter;
+    double pcenter;
+
 
 
     @Override
@@ -49,23 +57,26 @@ public class Vision extends LinearOpMode{
                 .enableLiveView(true)
                 .build();
         while (!isStopRequested()&& opModeIsActive()){
-            if(tagProcessor.getDetections().size() > 0){
+            if(!tagProcessor.getDetections().isEmpty()){
                 AprilTagDetection tag = tagProcessor.getDetections().get(0);
                 MotifID = tag.id;
                 Bearing = tag.ftcPose.bearing;
             }
-            if(purple.getBlobs().size()>500 && purple.getBlobs().size()<10000){
-                SeeP=true;
-            }
-            else {
-                SeeP=false;
-            }
-            if(green.getBlobs().size()>500 && green.getBlobs().size()<10000){
-                SeeG=true;
-            }
-            else {
-                SeeG=false;
-            }
+            SeeP= purple.getBlobs().size() > 500 && purple.getBlobs().size() < 10000;
+            SeeG= green.getBlobs().size() > 500 && green.getBlobs().size() < 10000;
+            List<ColorBlobLocatorProcessor.Blob> gblobs = green.getBlobs();
+            List<ColorBlobLocatorProcessor.Blob> pblobs = purple.getBlobs();
+            ColorBlobLocatorProcessor.Blob greenBlob = gblobs.isEmpty() ? null : gblobs.get(0);
+            ColorBlobLocatorProcessor.Blob purpleBlob = pblobs.isEmpty() ? null : pblobs.get(0);
+            assert greenBlob != null;
+            RotatedRect boxg = greenBlob.getBoxFit();
+            gcenter =  boxg.center.x;
+            assert purpleBlob != null;
+            RotatedRect boxp = purpleBlob.getBoxFit();
+            pcenter = boxp.center.x;
+
+
+
             telemetry.addData("Camera State", visionPortal.getCameraState());
             telemetry.update();
         }

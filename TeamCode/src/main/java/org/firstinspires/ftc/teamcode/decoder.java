@@ -7,6 +7,8 @@ public class decoder extends OpMode {
 
 
     public String Motif;
+    public boolean seered;
+    public boolean seeblue;
     public void loop(){
         Vision vision = new Vision();
         if (vision.MotifID==21){
@@ -18,12 +20,8 @@ public class decoder extends OpMode {
         if (vision.MotifID==23){
             Motif = "PPG";
         }
-        if (vision.MotifID==20){
-            //placeholder
-        }
-        if (vision.MotifID==24){
-            //placeholder
-        }
+        seeblue= vision.MotifID == 20;
+        seered= vision.MotifID == 24;
 
     }
 }
