@@ -25,6 +25,8 @@ public class Vision extends LinearOpMode{
     boolean SeeG;
     double gcenter;
     double pcenter;
+    List<ColorBlobLocatorProcessor.Blob> gblobs;
+    List<ColorBlobLocatorProcessor.Blob> pblobs;
 
 
 
@@ -64,8 +66,8 @@ public class Vision extends LinearOpMode{
             }
             SeeP= purple.getBlobs().size() > 500 && purple.getBlobs().size() < 10000;
             SeeG= green.getBlobs().size() > 500 && green.getBlobs().size() < 10000;
-            List<ColorBlobLocatorProcessor.Blob> gblobs = green.getBlobs();
-            List<ColorBlobLocatorProcessor.Blob> pblobs = purple.getBlobs();
+            gblobs = green.getBlobs();
+            pblobs = purple.getBlobs();
             ColorBlobLocatorProcessor.Blob greenBlob = gblobs.isEmpty() ? null : gblobs.get(0);
             ColorBlobLocatorProcessor.Blob purpleBlob = pblobs.isEmpty() ? null : pblobs.get(0);
             assert greenBlob != null;
