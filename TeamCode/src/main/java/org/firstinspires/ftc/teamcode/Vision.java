@@ -23,7 +23,8 @@ public class Vision extends LinearOpMode{
     boolean SeeG;
     double gcenter;
     double pcenter;
-    double seemotif;
+    boolean seered;
+    boolean seeblue;
     List<ColorBlobLocatorProcessor.Blob> gblobs;
     List<ColorBlobLocatorProcessor.Blob> pblobs;
 
@@ -65,6 +66,18 @@ public class Vision extends LinearOpMode{
                 AprilTagDetection tag = tagProcessor.getDetections().get(0);
                 MotifID = tag.id;
                 Bearing = tag.ftcPose.bearing;
+                if (tag.id==24){
+                    seered=true;
+                }
+                else{
+                    seered=false;
+                }
+                if (tag.id==20){
+                    seeblue=true;
+                }
+                else {
+                    seeblue=false;
+                }
             }
             SeeP= purple.getBlobs().size() > 500 && purple.getBlobs().size() < 10000;
             SeeG= green.getBlobs().size() > 500 && green.getBlobs().size() < 10000;

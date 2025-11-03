@@ -14,18 +14,32 @@ public class functions extends OpMode {
     public void init() {
         robot.init(this.hardwareMap);
     }
-    public void TurnTowardAprilTag() {
+    public void TurnTowardRedAprilTag() {
+        // Step 1: Turn using initial search powers until the AprilTag is seen
+        while (!vision.seered) {
+            // Example search powers — adjust as needed for your robot's turning behavior
+            robot.backleft.setPower(0.3);
+            robot.backright.setPower(-0.3);
+            robot.frontleft.setPower(0.3);
+            robot.frontright.setPower(-0.3);
+
+            sleep.sleepvoid(5); // Optional: short delay for responsiveness
+        }
+
+        // Step 2: Apply final alignment powers from apt
         robot.backleft.setPower(apt.aptblPower);
         robot.backright.setPower(apt.aptbrPower);
         robot.frontleft.setPower(apt.aptflPower);
         robot.frontright.setPower(apt.aptfrPower);
-        sleep.sleepvoid(5);
-        robot.frontleft.setPower(0);
-        robot.frontright.setPower(0);
+        // Optional: hold position briefly
+
+        // Step 3: Stop all motors
         robot.backleft.setPower(0);
         robot.backright.setPower(0);
-
+        robot.frontleft.setPower(0);
+        robot.frontright.setPower(0);
     }
+
     public void PickUpGreenBall() {
         double error = vision.gcenter - 320.0;
         double strafe = Math.max(-0.3, Math.min(0.3, error / 320.0));
@@ -57,7 +71,7 @@ public class functions extends OpMode {
         robot.frontright.setPower(forward - strafe);
         robot.backleft.setPower(forward - strafe);
         robot.backright.setPower(forward + strafe);
-        if (vision.gblobs.isEmpty()) {
+        if (vision.pblobs.isEmpty()) {
             robot.frontleft.setPower(0);
             robot.frontright.setPower(0);
             robot.backleft.setPower(0);
