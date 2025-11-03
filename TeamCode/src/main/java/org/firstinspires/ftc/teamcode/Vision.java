@@ -11,8 +11,6 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorRange;
 import org.firstinspires.ftc.vision.opencv.ColorSpace;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
 import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 
@@ -25,6 +23,7 @@ public class Vision extends LinearOpMode{
     boolean SeeG;
     double gcenter;
     double pcenter;
+    double seemotif;
     List<ColorBlobLocatorProcessor.Blob> gblobs;
     List<ColorBlobLocatorProcessor.Blob> pblobs;
 
@@ -42,7 +41,9 @@ public class Vision extends LinearOpMode{
                         ColorSpace.HSV,
                         new Scalar(35,100,100),
                         new Scalar(85,255,255)
-                ))
+                        )
+                )
+                .setContourMode(ColorBlobLocatorProcessor.ContourMode.ALL_FLATTENED_HIERARCHY)
                 .build();
         ColorBlobLocatorProcessor purple = new ColorBlobLocatorProcessor.Builder()
                 .setTargetColorRange(new ColorRange(
@@ -51,6 +52,7 @@ public class Vision extends LinearOpMode{
                         new Scalar(160,255,255)
                         )
                 )
+                .setContourMode(ColorBlobLocatorProcessor.ContourMode.ALL_FLATTENED_HIERARCHY)
                 .build();
         VisionPortal visionPortal = new VisionPortal.Builder()
                 .addProcessors(tagProcessor, green, purple)

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class functions extends OpMode {
     public hardware robot = new hardware();
@@ -68,6 +69,48 @@ public class functions extends OpMode {
             robot.intake2.setPower(0);
         }
     }
+    public void spinDoubleDegrees(double degrees) {
+        double ticksPerDegree = 537.6;
+        int targetTicks = (int)(degrees * 2 * ticksPerDegree);
+
+        // Reset encoders
+        robot.frontleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // Set target positions for in-place rotation
+        robot.frontleft.setTargetPosition(-targetTicks);
+        robot.backleft.setTargetPosition(-targetTicks);
+        robot.frontright.setTargetPosition(targetTicks);
+        robot.backright.setTargetPosition(targetTicks);
+
+        // Set to run to position
+        robot.frontleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.frontright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.backleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.backright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // Apply power
+        robot.frontleft.setPower(0.5);
+        robot.frontright.setPower(0.5);
+        robot.backleft.setPower(0.5);
+        robot.backright.setPower(0.5);
+
+        // Wait until all motors finish
+        while (robot.frontleft.isBusy() && robot.frontright.isBusy() &&
+                robot.backleft.isBusy() && robot.backright.isBusy()) {
+            // Optional: telemetry.addData("Spinning", "In progress");
+            // telemetry.update();
+        }
+
+        // Stop all motors
+        robot.frontleft.setPower(0);
+        robot.frontright.setPower(0);
+        robot.backleft.setPower(0);
+        robot.backright.setPower(0);
+    }
+
 
     @Override
     public void loop() {}

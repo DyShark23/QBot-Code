@@ -18,8 +18,8 @@ public class Teleop extends OpMode {
         double rot = rot1*-1;
         double FL = fwd+str+rot;
         double FR = fwd-str-rot;
-        double RL = fwd-str+rot;
-        double RR = fwd+str-rot;
+        double RL = (fwd-str+rot)*0.8;
+        double RR = (fwd+str-rot)*0.8;
         double shoot = -gamepad1.left_trigger;
         double intake = -gamepad1.right_trigger;
         double lshoot = shoot*(-1);
