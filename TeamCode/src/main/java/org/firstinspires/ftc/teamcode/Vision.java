@@ -66,19 +66,9 @@ public class Vision extends LinearOpMode{
                 AprilTagDetection tag = tagProcessor.getDetections().get(0);
                 MotifID = tag.id;
                 Bearing = tag.ftcPose.bearing;
-                if (tag.id==24){
-                    seered=true;
-                }
-                else{
-                    seered=false;
-                }
-                if (tag.id==20){
-                    seeblue=true;
-                }
-                else {
-                    seeblue=false;
-                }
             }
+            seered= tagProcessor.getDetections().get(0).id == 24;
+            seeblue= tagProcessor.getDetections().get(0).id == 20;
             SeeP= purple.getBlobs().size() > 500 && purple.getBlobs().size() < 10000;
             SeeG= green.getBlobs().size() > 500 && green.getBlobs().size() < 10000;
             gblobs = green.getBlobs();

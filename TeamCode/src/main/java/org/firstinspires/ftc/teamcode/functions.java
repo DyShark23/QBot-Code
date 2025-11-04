@@ -39,6 +39,31 @@ public class functions extends OpMode {
         robot.frontleft.setPower(0);
         robot.frontright.setPower(0);
     }
+    public void TurnTowardBlueAprilTag() {
+        // Step 1: Turn using initial search powers until the AprilTag is seen
+        while (!vision.seeblue) {
+            // Example search powers — adjust as needed for your robot's turning behavior
+            robot.backleft.setPower(0.3);
+            robot.backright.setPower(-0.3);
+            robot.frontleft.setPower(0.3);
+            robot.frontright.setPower(-0.3);
+
+            sleep.sleepvoid(5); // Optional: short delay for responsiveness
+        }
+
+        // Step 2: Apply final alignment powers from apt
+        robot.backleft.setPower(apt.aptblPower);
+        robot.backright.setPower(apt.aptbrPower);
+        robot.frontleft.setPower(apt.aptflPower);
+        robot.frontright.setPower(apt.aptfrPower);
+        // Optional: hold position briefly
+
+        // Step 3: Stop all motors
+        robot.backleft.setPower(0);
+        robot.backright.setPower(0);
+        robot.frontleft.setPower(0);
+        robot.frontright.setPower(0);
+    }
 
     public void PickUpGreenBall() {
         double error = vision.gcenter - 320.0;
@@ -124,6 +149,7 @@ public class functions extends OpMode {
         robot.backleft.setPower(0);
         robot.backright.setPower(0);
     }
+
 
 
     @Override
