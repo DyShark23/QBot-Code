@@ -42,8 +42,8 @@ public class TurnTowardAprilTag {
         Vision vision = new Vision();
 
         // Check if bearing is valid (assuming -999 means "no tag detected")
-        if (vision.Bearing != -999) {
-            updatePowersFromBearing(vision.Bearing);
+        if (vision.bearing != -999) {
+            updatePowersFromBearing(vision.bearing);
         } else {
             // Stop movement if no valid bearing
             aptflPower = 0;
