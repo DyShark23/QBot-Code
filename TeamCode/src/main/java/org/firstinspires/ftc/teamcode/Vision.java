@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import android.util.Size;
-
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -16,75 +16,142 @@ import org.opencv.core.Scalar;
 
 import java.util.List;
 
-public class Vision extends LinearOpMode{
-    double MotifID;
-    double Bearing;
-    boolean SeeP;
-    boolean SeeG;
-    double gcenter;
-    double pcenter;
-    boolean seered;
-    boolean seeblue;
-    List<ColorBlobLocatorProcessor.Blob> gblobs;
-    List<ColorBlobLocatorProcessor.Blob> pblobs;
+@Autonomous(name = "Vision Test Final Fixed")
+public class Vision extends LinearOpMode {
 
-
+    double motifID = -1;
+    double bearing = 0;
+    boolean seePurple = false;
+    boolean seeGreen = false;
+    double greenCenter = -1;
+    double purpleCenter = -1;
+    boolean seeRedTag = false;
+    boolean seeBlueTag = false;
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() throws InterruptedException {
 
+        // AprilTag processor
         AprilTagProcessor tagProcessor = new AprilTagProcessor.Builder()
                 .setDrawTagID(true)
                 .setDrawTagOutline(true)
                 .build();
-        ColorBlobLocatorProcessor green = new ColorBlobLocatorProcessor.Builder()
+
+        // Green blob processor — FTC recommended range
+        ColorBlobLocatorProcessor greenProcessor = new ColorBlobLocatorProcessor.Builder()
                 .setTargetColorRange(new ColorRange(
                         ColorSpace.HSV,
-                        new Scalar(35,100,100),
-                        new Scalar(85,255,255)
-                        )
-                )
+                        new Scalar(35, 50, 70),
+                        new Scalar(90, 255, 255)
+                ))
                 .setContourMode(ColorBlobLocatorProcessor.ContourMode.ALL_FLATTENED_HIERARCHY)
                 .build();
-        ColorBlobLocatorProcessor purple = new ColorBlobLocatorProcessor.Builder()
+
+        // Purple blob processor — tightened to avoid pinks
+        ColorBlobLocatorProcessor purpleProcessor = new ColorBlobLocatorProcessor.Builder()
                 .setTargetColorRange(new ColorRange(
                         ColorSpace.HSV,
-                        new Scalar(125,80,80),
-                        new Scalar(160,255,255)
-                        )
-                )
+                        new Scalar(135, 100, 100),
+                        new Scalar(155, 255, 255)
+                ))
                 .setContourMode(ColorBlobLocatorProcessor.ContourMode.ALL_FLATTENED_HIERARCHY)
                 .build();
+
+        // Vision portal setup
         VisionPortal visionPortal = new VisionPortal.Builder()
-                .addProcessors(tagProcessor, green, purple)
-                .setCamera(hardwareMap.get(WebcamName.class,"Webcam1"))
-                .setCameraResolution(new Size(640,480))
+                .addProcessors(tagProcessor, greenProcessor, purpleProcessor)
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam1"))
+                .setCameraResolution(new Size(640, 480))
                 .enableLiveView(true)
                 .build();
-        while (!isStopRequested()&& opModeIsActive()){
-            if(!tagProcessor.getDetections().isEmpty()){
-                AprilTagDetection tag = tagProcessor.getDetections().get(0);
-                MotifID = tag.id;
-                Bearing = tag.ftcPose.bearing;
+
+        waitForStart();
+
+        while (opModeIsActive() && !isStopRequested()) {
+
+            // AprilTag detection
+            List<AprilTagDetection> detections = tagProcessor.getDetections();
+            if (detections != null && !detections.isEmpty()) {
+                AprilTagDetection tag = detections.get(0);
+                motifID = tag.id;
+                bearing = tag.ftcPose.bearing;
+                seeRedTag = tag.id == 24;
+                seeBlueTag = tag.id == 20;
+            } else {
+                seeRedTag = false;
+                seeBlueTag = false;
             }
-            seered= tagProcessor.getDetections().get(0).id == 24;
-            seeblue= tagProcessor.getDetections().get(0).id == 20;
-            SeeP= purple.getBlobs().size() > 500 && purple.getBlobs().size() < 10000;
-            SeeG= green.getBlobs().size() > 500 && green.getBlobs().size() < 10000;
-            gblobs = green.getBlobs();
-            pblobs = purple.getBlobs();
-            ColorBlobLocatorProcessor.Blob greenBlob = gblobs.isEmpty() ? null : gblobs.get(0);
-            ColorBlobLocatorProcessor.Blob purpleBlob = pblobs.isEmpty() ? null : pblobs.get(0);
-            assert greenBlob != null;
-            RotatedRect boxg = greenBlob.getBoxFit();
-            gcenter =  boxg.center.x;
-            assert purpleBlob != null;
-            RotatedRect boxp = purpleBlob.getBoxFit();
-            pcenter = boxp.center.x;
 
+            // Green blob detection with full null safety
+            List<ColorBlobLocatorProcessor.Blob> greenBlobs = greenProcessor.getBlobs();
+            ColorBlobLocatorProcessor.Blob bestGreenBlob = null;
+            double maxGreenArea = 0;
 
+            if (greenBlobs != null) {
+                for (ColorBlobLocatorProcessor.Blob blob : greenBlobs) {
+                    if (blob != null) {
+                        RotatedRect box = blob.getBoxFit();
+                        if (box != null) {
+                            double area = box.size.area();
+                            if (area > maxGreenArea) {
+                                maxGreenArea = area;
+                                bestGreenBlob = blob;
+                            }
+                        }
+                    }
+                }
+            }
 
+            if (bestGreenBlob != null && bestGreenBlob.getBoxFit() != null) {
+                RotatedRect box = bestGreenBlob.getBoxFit();
+                greenCenter = box.center.x;
+                seeGreen = maxGreenArea > 800;
+            } else {
+                greenCenter = -1;
+                seeGreen = false;
+            }
+
+            // Purple blob detection with full null safety
+            List<ColorBlobLocatorProcessor.Blob> purpleBlobs = purpleProcessor.getBlobs();
+            ColorBlobLocatorProcessor.Blob bestPurpleBlob = null;
+            double maxPurpleArea = 0;
+
+            if (purpleBlobs != null) {
+                for (ColorBlobLocatorProcessor.Blob blob : purpleBlobs) {
+                    if (blob != null) {
+                        RotatedRect box = blob.getBoxFit();
+                        if (box != null) {
+                            double area = box.size.area();
+                            if (area > maxPurpleArea) {
+                                maxPurpleArea = area;
+                                bestPurpleBlob = blob;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (bestPurpleBlob != null && bestPurpleBlob.getBoxFit() != null) {
+                RotatedRect box = bestPurpleBlob.getBoxFit();
+                purpleCenter = box.center.x;
+                seePurple = maxPurpleArea > 800;
+            } else {
+                purpleCenter = -1;
+                seePurple = false;
+            }
+
+            // Telemetry
             telemetry.addData("Camera State", visionPortal.getCameraState());
+            telemetry.addData("AprilTag ID", motifID);
+            telemetry.addData("Bearing", bearing);
+            telemetry.addData("See Red Tag", seeRedTag);
+            telemetry.addData("See Blue Tag", seeBlueTag);
+            telemetry.addData("Green Blob Area", maxGreenArea);
+            telemetry.addData("Purple Blob Area", maxPurpleArea);
+            telemetry.addData("See Green", seeGreen);
+            telemetry.addData("See Purple", seePurple);
+            telemetry.addData("Green Center", greenCenter);
+            telemetry.addData("Purple Center", purpleCenter);
             telemetry.update();
         }
     }

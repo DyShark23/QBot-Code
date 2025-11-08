@@ -68,13 +68,14 @@ public class functions extends OpMode {
     public void PickUpGreenBall() {
         double error = vision.gcenter - 320.0;
         double strafe = Math.max(-0.3, Math.min(0.3, error / 320.0));
-        double forward = 0.4;
+        double forward = 0.5;
 
         robot.frontleft.setPower(forward + strafe);
         robot.frontright.setPower(forward - strafe);
         robot.backleft.setPower(forward - strafe);
         robot.backright.setPower(forward + strafe);
         if (vision.gblobs.isEmpty()) {
+            sleep.sleepvoid(2);
             robot.frontleft.setPower(0);
             robot.frontright.setPower(0);
             robot.backleft.setPower(0);
