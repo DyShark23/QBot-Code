@@ -16,19 +16,17 @@ public class decoder extends OpMode {
     public boolean seeblue;
     public void loop(){
         Vision vision = new Vision();
-        if (vision.MotifID==21){
-            MotifUR = "GPP";
+        if (vision.motifID==21){
+            Motif = "GPP";
         }
-        if (vision.MotifID==22){
+        if (vision.motifID==22){
             MotifUR = "PGP";
         }
-        if (vision.MotifID==23){
-            MotifUR = "PPG";
+        if (vision.motifID==23){
+            Motif = "PPG";
         }
-        seeblue= vision.MotifID == 20;
-        seered= vision.MotifID == 24;
-        String MotifBF = new StringBuilder(MotifUR).reverse().toString();
-        Motif = Arrays.asList(MotifBF.split(""));
+        seeblue= vision.motifID == 20;
+        seered= vision.motifID == 24;
 
     }
 }
