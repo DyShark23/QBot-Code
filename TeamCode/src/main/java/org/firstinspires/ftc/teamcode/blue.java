@@ -39,70 +39,70 @@ public class blue extends LinearOpMode {
         String Index3 = decoder.Motif.get(2);
         while (!isStopRequested() && opModeIsActive()) {
             if (Objects.equals(Index1, "P")) {
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpPurpleBall();
             } else {
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpGreenBall();
             }
             if (Objects.equals(Index2, "P")) {
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpPurpleBall();
             } else {
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpGreenBall();
             }
             if (Objects.equals(Index3, "P")) {
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeP) {
+                if (!vision.seePurple) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpPurpleBall();
             } else {
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(90);
                 }
-                if (!vision.SeeG) {
+                if (!vision.seeGreen) {
                     functions.spinDoubleDegrees(180);
                 }
                 functions.PickUpGreenBall();
