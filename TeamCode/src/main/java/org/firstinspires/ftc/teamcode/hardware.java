@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 
 
 public class hardware {
@@ -14,6 +15,7 @@ public class hardware {
     public DcMotor shooter2;//Tell Java that there is a new motor called shooter2. This will shoot the ball out.
     public DcMotor intake;//def intake
     public DcMotor intake2; //def intake 2
+    public IMU imu;
 
     public void init(HardwareMap hardwareMap) {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -56,6 +58,7 @@ public class hardware {
         intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intake2.setPower(0);
 
+        imu = hardwareMap.get(IMU.class,"imu");
     }
 }
 
