@@ -1,17 +1,18 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class functions extends OpMode {
+public class functions {
     public hardware robot = new hardware();
     public TurnTowardAprilTag apt = new TurnTowardAprilTag();
     public sleep sleep = new sleep();
-    public Vision vision = new Vision();
+    public Vision vision;
 
-    @Override
-    public void init() {
-        robot.init(this.hardwareMap);
+    // Initialization method (instead of constructor)
+    public void init(HardwareMap hardwareMap, Vision visionInstance) {
+        robot.init(hardwareMap);
+        vision = visionInstance;
     }
 
     public void TurnTowardRedAprilTag() {
@@ -70,11 +71,7 @@ public class functions extends OpMode {
             robot.frontright.setPower(0);
             robot.backleft.setPower(0);
             robot.backright.setPower(0);
-            robot.intake.setPower(2);
-            robot.intake2.setPower(2);
             sleep.sleepvoid(5);
-            robot.intake.setPower(0);
-            robot.intake2.setPower(0);
         }
     }
 
@@ -93,11 +90,7 @@ public class functions extends OpMode {
             robot.frontright.setPower(0);
             robot.backleft.setPower(0);
             robot.backright.setPower(0);
-            robot.intake.setPower(2);
-            robot.intake2.setPower(2);
             sleep.sleepvoid(5);
-            robot.intake.setPower(0);
-            robot.intake2.setPower(0);
         }
     }
 
@@ -127,8 +120,7 @@ public class functions extends OpMode {
 
         while (robot.frontleft.isBusy() && robot.frontright.isBusy() &&
                 robot.backleft.isBusy() && robot.backright.isBusy()) {
-            // Optional: telemetry.addData("Spinning", "In progress");
-            // telemetry.update();
+            // Optional telemetry updates
         }
 
         robot.frontleft.setPower(0);
@@ -137,6 +129,17 @@ public class functions extends OpMode {
         robot.backright.setPower(0);
     }
 
-    @Override
-    public void loop() {}
+    public double rpmFromDistance(double x, double y, double z) {
+        double baseRPM = 2500;
+        double gainRPM = 1200;
+
+        double distance = Math.sqrt(x * x + y * y + z * z);
+
+        double rpm = baseRPM + gainRPM * distance;
+
+        rpm = Math.min(rpm, 6000);
+        rpm = Math.max(rpm, 1500);
+
+        return rpm;
+    }
 }

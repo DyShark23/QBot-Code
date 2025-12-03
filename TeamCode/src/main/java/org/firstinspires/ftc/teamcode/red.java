@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import java.util.Objects;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "red")
+@Autonomous(name = "red")
 public class red extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -13,107 +14,78 @@ public class red extends LinearOpMode {
         Vision vision = new Vision();
         hardware robot = new hardware();
         sleep s = new sleep();
-        if (decoder.Motif.isEmpty()) {
-            robot.frontright.setPower(2);
-            robot.frontleft.setPower(2);
-            robot.backright.setPower(2);
-            robot.backleft.setPower(2);
-            s.sleepvoid(3);
-            robot.frontright.setPower(0);
-            robot.frontleft.setPower(0);
-            robot.backright.setPower(0);
-            robot.backleft.setPower(0);
+
+        functions.init(hardwareMap, vision);
+        vision.init(hardwareMap);
+        decoder.init(vision);
+        robot.init(hardwareMap);
+
+        // initialize motors to 0 power at init
+        robot.frontright.setPower(0);
+        robot.frontleft.setPower(0);
+        robot.backright.setPower(0);
+        robot.backleft.setPower(0);
+
+        waitForStart();
+
+        // spin until motif has 3 entries
+        while (decoder.Motif.isEmpty()){
+            functions.spinDoubleDegrees(10);
+            decoder.update();
         }
-        if (decoder.Motif.isEmpty()) {
-            s.sleepvoid(3);
-            robot.frontright.setPower(-2);
-            robot.frontleft.setPower(2);
-            robot.backright.setPower(2);
-            robot.backleft.setPower(-2);
-            s.sleepvoid(1);
-            functions.spinDoubleDegrees(180);
 
-        }
-        String Index1 = decoder.Motif.get(0);
-        String Index2 = decoder.Motif.get(1);
-        String Index3 = decoder.Motif.get(2);
-        while (!isStopRequested() && opModeIsActive()) {
-            if (Objects.equals(Index1, "P")) {
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
+        // stop spinning
+        robot.frontright.setPower(0);
+        robot.backright.setPower(0);
+        robot.frontleft.setPower(0);
+        robot.backleft.setPower(0);
+
+        // now safe to use motif
+        if (decoder.Motif.size() >= 3) {
+            String Index1 = decoder.Motif.get(0);
+            String Index2 = decoder.Motif.get(1);
+            String Index3 = decoder.Motif.get(2);
+
+            while (!isStopRequested() && opModeIsActive()) {
+                if (Objects.equals(Index1, "P")) {
+                    if (!vision.seePurple) {
+                        functions.spinDoubleDegrees(90);
+                    }
+                } else {
+                    if (!vision.seeGreen) {
+                        functions.spinDoubleDegrees(90);
+                    }
                 }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(90);
+
+                if (Objects.equals(Index2, "P")) {
+                    if (!vision.seePurple) {
+                        functions.spinDoubleDegrees(90);
+                    }
+                } else {
+                    if (!vision.seeGreen) {
+                        functions.spinDoubleDegrees(90);
+                    }
                 }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
+
+                if (Objects.equals(Index3, "P")) {
+                    if (!vision.seePurple) {
+                        functions.spinDoubleDegrees(90);
+                    }
+                } else {
+                    if (!vision.seeGreen) {
+                        functions.spinDoubleDegrees(90);
+                    }
                 }
-                functions.PickUpPurpleBall();
-            } else {
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(90);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                functions.PickUpGreenBall();
+
+                functions.TurnTowardRedAprilTag();
+                functions.spinDoubleDegrees(180);
+
+                telemetry.addData("Sho1", functions.rpmFromDistance(vision.x, vision.y, vision.z));
+                telemetry.addData("sho2", -functions.rpmFromDistance(vision.x, vision.y, vision.z));
+                telemetry.update();
+
+                s.sleepvoid(5);
             }
-            if (Objects.equals(Index2, "P")) {
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
-                }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(90);
-                }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
-                }
-                functions.PickUpPurpleBall();
-            } else {
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(90);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                functions.PickUpGreenBall();
-            }
-            if (Objects.equals(Index3, "P")) {
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
-                }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(90);
-                }
-                if (!vision.seePurple) {
-                    functions.spinDoubleDegrees(180);
-                }
-                functions.PickUpPurpleBall();
-            } else {
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(90);
-                }
-                if (!vision.seeGreen) {
-                    functions.spinDoubleDegrees(180);
-                }
-                functions.PickUpGreenBall();
-
-
-            }
-            functions.TurnTowardRedAprilTag();
-            robot.shooter.setPower(2);
-            robot.shooter2.setPower(-2);
-            s.sleepvoid(5);
-
         }
     }
 }

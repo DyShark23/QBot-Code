@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
-
 
 public class hardware {
     public DcMotor frontleft; //Tell Java that there is a DcMotor In the front left. This is a wheel
@@ -15,8 +14,8 @@ public class hardware {
     public DcMotor shooter2;//Tell Java that there is a new motor called shooter2. This will shoot the ball out.
     public DcMotor intake;//def intake
     public DcMotor intake2; //def intake 2
-    public IMU imu;
-
+    public CRServo feed1;
+    public CRServo feed2;
     public void init(HardwareMap hardwareMap) {
         frontleft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -31,7 +30,8 @@ public class hardware {
 
         backleft = hardwareMap.get(DcMotor.class, "backLeft");
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);backleft.setPower(0);
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backleft.setPower(0);
 
         backright = hardwareMap.get(DcMotor.class, "backRight");
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -46,6 +46,7 @@ public class hardware {
         shooter2 = hardwareMap.get(DcMotor.class, "shooter2");
         shooter2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooter2.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter2.setPower(0);
 
         intake = hardwareMap.get(DcMotor.class,"intake");
@@ -56,9 +57,15 @@ public class hardware {
         intake2 = hardwareMap.get(DcMotor.class,"intake2");
         intake2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake2.setDirection(DcMotorSimple.Direction.REVERSE);
         intake2.setPower(0);
 
-        imu = hardwareMap.get(IMU.class,"imu");
+        feed1 = hardwareMap.get(CRServo.class,"f1");
+        feed1.setPower(0);
+
+        feed2 = hardwareMap.get(CRServo.class,"f2");
+        feed2.setDirection(DcMotorSimple.Direction.REVERSE);
+        feed2.setPower(0);
     }
 }
 

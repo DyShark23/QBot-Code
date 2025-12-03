@@ -110,8 +110,9 @@ public class blue extends LinearOpMode {
 
             }
             functions.TurnTowardBlueAprilTag();
-            robot.shooter.setPower(2);
-            robot.shooter2.setPower(-2);
+            functions.spinDoubleDegrees(180);
+            robot.shooter.setPower(functions.rpmFromDistance(vision.x, vision.y, vision.z));
+            robot.shooter2.setPower(-functions.rpmFromDistance(vision.x, vision.y, vision.z));
             s.sleepvoid(5);
 
         }
